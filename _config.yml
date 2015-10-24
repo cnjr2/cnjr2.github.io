@@ -9,3 +9,4 @@ github_username: cnjr2
 
 # Build settings
 markdown: kramdown
+highlighter: pygments
