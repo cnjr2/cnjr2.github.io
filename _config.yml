@@ -1,0 +1,11 @@
+# Site settings
+title: clatalogue
+email: clatalogue@gmail.com
+description: > # this means to ignore newlines until "baseurl:"
+  Blog on data related projects.
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "http://yourdomain.com" # the base hostname & protocol for your site
+github_username: cnjr2
+
+# Build settings
+markdown: kramdown
