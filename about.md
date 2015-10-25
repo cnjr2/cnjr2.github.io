@@ -4,4 +4,4 @@ title: About
 permalink: /about/
 ---
 
-Personal blog.
+A personal blog.
