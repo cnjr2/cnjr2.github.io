@@ -1,7 +1,7 @@
 /* Site Header
  * ============================================== */
     .site-header {
-        min-height: 450px;
+        min-height: 0px;
         background-color: $brand-color;
         background-image: url('');
         background-size: cover;
@@ -9,7 +9,7 @@
         background-attachment: fixed;
 
         @include media-query($on-palm) {
-            min-height: 250px;
+            min-height: 0px;
             background-position: center -250px;
         }
     }
@@ -19,10 +19,10 @@
     .site-header h1 {
         display: block;
         font-size: 80px !important;
-        line-height: 80px;
+        line-height: 40px;
         letter-spacing: 3px;
         text-align: center;
-        padding-top: 20px;
+        padding-top: 0px;
         clear: both;
         text-transform: uppercase;
         font-family: 'Open Sans';
@@ -34,9 +34,9 @@
     }
 
     .site-header span {
-        border: 10px solid #FFF;
-        padding: 0.3em 0.5em;
-        margin: 10px 20px;
+//        border: 10px solid #FFF;
+//        padding: 0.3em 0.5em;
+        margin: 10px 10px;
         display: inline-block;
 
         @include media-query($on-palm) {
@@ -47,13 +47,14 @@
 
     .site-nav {
         float: right;
-        line-height: 56px;
+        line-height: 10px;
         margin-right: 25px;
-        padding-bottom: 100px;
+        padding-bottom: 0px;
 
         .page-link {
+            color: #999999;
             line-height: $base-line-height;
-            font-weight: bold;
+//            font-weight: bold;
             letter-spacing: 0.05em;
 
             &:not(:first-child) {
@@ -66,7 +67,7 @@
         }
 
         @include media-query($on-palm) {
-            padding-bottom: 10px;
+            padding-bottom: 0px;
         }
     }
 
