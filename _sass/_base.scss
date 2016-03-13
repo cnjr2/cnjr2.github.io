@@ -74,7 +74,7 @@
 /* Links
  * ============================================== */
     a {
-        color: darken($brand-color, 10%);
+        color: $brand-color; //darken($brand-color, 10%);
         text-decoration: none;
 
         &:hover {
@@ -107,7 +107,7 @@ pre {
     padding: 8px 12px;
     overflow-x: scroll;
     display: block;
-    background-color: $brand-color;
+    background-color: #F5F5F5;
 }
 
 div.linenodiv pre {
@@ -131,6 +131,16 @@ table.highlighttable {
         padding: 0px;
     }
 }
+
+/* Horizontal lines
+ * ============================================== */
+
+    hr {
+        border: 0;
+        height: 0;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    }
 
 /* Wrapper
  * ============================================== */
@@ -169,6 +179,11 @@ table.highlighttable {
         border-spacing: 0;
         margin: 0 auto 1.5em auto;
 
+        // to keep tables within the text width
+        display: block;
+        border: 0;
+        overflow: auto;
+
         tr:nth-child(2n) {
             background-color: #f8f8f8
         }
@@ -190,5 +205,3 @@ table.highlighttable {
 
 
     }
-
-

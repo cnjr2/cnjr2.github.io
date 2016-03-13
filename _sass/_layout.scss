@@ -2,7 +2,7 @@
  * ============================================== */
     .site-header {
         min-height: 0px;
-        background-color: $brand-color;
+        background-color: #F5F5F5;
         background-image: url('');
         background-size: cover;
         background-position: center -170px;
@@ -111,7 +111,7 @@
         font-weight: 300;
         font-size: 1.5em;
         letter-spacing: -1px;
-        color: #454545;
+        color: $brand-color; //#808080;
         display: block;
         width: 100%;
 
