@@ -1,13 +1,14 @@
 ---
 layout: post
 title: "Exploratory data analysis and interactive figures with Plotly"
-date: "2016-02-07"
 categories: eda plotly
+published: true
 ---
 
 A crucial step of any machine learning attempt is getting a good impression of your dataset. Exploratory data analysis (or [EDA](https://en.wikipedia.org/wiki/Exploratory_data_analysis)) is one way to do this. It consists of summarizing the data with descriptive statistics and often involves extensive plotting. The web is full of plotting libraries that help with this task and more recently, the resulting plots have become interactive.
 
-<div style="text-align:center;"><img src="https://cambridgecoding.files.wordpress.com/2016/02/introduction_plot.png?w=300" alt="introduction_plot" width="300" height="300" class="alignnone size-medium wp-image-846" /></div>
+{: .center}
+![EDA with Plotly](/assets/eda_plotly_introduction_plot.png)
 
 One such interactive plotting library is [Plotly](https://plot.ly/) and it offers very intuitive ways to display data and make it interactive. Furthermore it can be used though a variety of platforms, i.e. it can be used with Python, JavaScript, R and others. Crucially, it has recently been made open source, which now enables plotting without requiring access to their API.
 
@@ -15,7 +16,7 @@ In the following post, I will show how to build a scatter plot matrix that is "s
 
 Throughout this post we will be using a couple of libraries that first need to be installed. The libraries make some tasks more convenient, such as the loading of the data ([pandas](http://pandas.pydata.org/)) and numerical processing ([numpy](http://www.numpy.org/)). Then we also need to install Plotly ([plotly](https://plot.ly/python/getting-started/)) and a library for neater selection of colour schemes ([colorlover](https://plot.ly/ipython-notebooks/color-scales/)). Just type...
 
-{% highlight bash lineanchors linenos=table %}
+{% highlight bash %}
 pip install plotly
 pip install colorlover
 {% endhighlight %}
@@ -29,7 +30,7 @@ Furthermore, we will need to load a dataset that we want to explore. I have pick
 Let us start to explore the dataset by loading it into our python session with `pandas`.
 
 
-{% highlight python lineanchors linenos=table %}
+{% highlight python %}
 #library to load the dataset and to make table manipulation more convenient
 import pandas as pd
 
@@ -40,7 +41,7 @@ df = pd.read_csv('./winequality-red.csv', delimiter = ";")
 To get an impression of the dataset we can quickly check how large it is in terms of number of columns and rows. The `shape` command is very convenient for this. We have 12 columns and 1599 rows. This is good to know so we can already plan the types of visualisations that could cope with these amounts of data, or whether the data should be aggregated or summarised in some way to facilitate visualisation.
 
 
-{% highlight python lineanchors linenos=table %}
+{% highlight python %}
 df.shape #get an impression how large the dataset is
 {% endhighlight %}
 
@@ -54,7 +55,7 @@ df.shape #get an impression how large the dataset is
 Another way to have a peak is to show the head of the table with `head()`. This is very useful as we can immediately see what the columns and rows correspond to.
 
 
-{% highlight python lineanchors linenos=table %}
+{% highlight python %}
 df.head()
 {% endhighlight %}
 
@@ -165,7 +166,7 @@ df.head()
 In this case, every row represents a wine and the different columns (with the last column being an exception) are features describing the wines. All these columns are numerical. The last column defines the `quality` of the individual wines with a score. To further refine our initial impression we can use the `describe` method to get useful summary statistics on a per-column basis. The statistics are indicated neatly as rownames.
 
 
-{% highlight python lineanchors linenos=table %}
+{% highlight python %}
 df.describe()
 {% endhighlight %}
 
@@ -321,7 +322,7 @@ df.describe()
 Unfortunately this is not very useful for understanding the `quality` column. What we want is to see the different quality scores that wine can take. This can be achieved with the following command:
 
 
-{% highlight python lineanchors linenos=table %}
+{% highlight python %}
 pd.unique(df.quality.ravel())
 {% endhighlight %}
 
@@ -343,7 +344,7 @@ In order to get a high level impression of the dataset, I will reduce its comple
 We do this conveniently with a `lambda` function that is applied to a colum with `apply`. A [`lambda` function](http://www.secnetix.de/olli/Python/lambda_functions.hawk) is very similar to a function.
 
 
-{% highlight python lineanchors linenos=table %}
+{% highlight python %}
 df['quality_bin'] = df.quality.apply(lambda x: 1 if x >= 6 else 0)
 quality_classes = pd.unique(df.quality_bin.ravel())
 print(quality_classes)
@@ -355,7 +356,7 @@ print(quality_classes)
 For faster processing of the data and faster plotting, we will also reduce the number of wines that we inspect at the same time. To do this, we will sample a random subset of the wines; in this case we will only look at 100.
 
 
-{% highlight python lineanchors linenos=table %}
+{% highlight python %}
 #load dataset and take a subset for faster data processing
 df_sample = df.sample(n = 100)
 df_sample.head()
@@ -476,7 +477,7 @@ df_sample.head()
 If you just start the tutorial from here, make sure to run the following few commands to load the dataset and simplify it first.
 
 
-{% highlight python lineanchors linenos=table %}
+{% highlight python %}
 import pandas as pd #library to load the dataset and to make table manipulation more convenient
 df = pd.read_csv('./winequality-red.csv', delimiter = ";") #the delimiter is the character that separates columns
 df['quality_bin'] = df.quality.apply(lambda x: 1 if x >= 6 else 0)
@@ -487,7 +488,7 @@ df_sample = df.sample(n = 100)
 Plotly works with `traces`. Traces are dictionaries that contain both the data of a plot, as well as instructions on how to format it. Let's generate one of these traces to examine what they are made out of. First, we load the plotly library and from within it some of the plots types that we want to generate, i.e. Scatter for scatter plots and Box for boxplots. (Note: the `py.offline.init_notebook_mode()` line is required to generate plots when not accessing their API with your registered credentials).
 
 
-{% highlight python lineanchors linenos=table %}
+{% highlight python %}
 import plotly #load plotly for plotting
 import plotly.plotly as py
 from plotly import tools
@@ -498,7 +499,7 @@ plotly.offline.init_notebook_mode() # run at the start of every ipython notebook
 Then we pick two wine features that we want to assess for how they are related. Here I picked `"pH"` and `"chlorides"`. To generate the scatter trace, we run the `Scatter` function.
 
 
-{% highlight python lineanchors linenos=table %}
+{% highlight python %}
 #pick two featues
 f1 = "pH"
 f2 = "chlorides"
@@ -545,7 +546,7 @@ For example, this scatterplot contains a series of items including `'type'` that
 To visualise the trace, we first need to place it into a list; usually we have more than one trace that we want to plot and therefore they need to be housed in a list. Finally we create a figure dictionary where the traces list is assigned to the `'data'` item. The figure can then be visualised.
 
 
-{% highlight python lineanchors linenos=table %}
+{% highlight python %}
 traces = [] #the list to fill with trace dictionaries
 traces.append(scatter_plot_trace)
 
@@ -560,7 +561,7 @@ plotly.offline.iplot(fig)
 This gives us our first Plotly plot (Note: click on the plot to view it interactively - it is hosted on www.plot.ly). Although it is very bare-bones, it already comes with interactivity; when hovering over the individual points, it highlights the coordinates in tooltips. However, we want to do better than this. For instance, we would to at the very least like add axis titles. To achieve this, we need to build a `layout` dictionary.
 
 
-{% highlight python lineanchors linenos=table %}
+{% highlight python %}
 scatter_plot_layout = Layout(
     xaxis = dict(
         title = f1
@@ -579,7 +580,7 @@ print(scatter_plot_layout)
 As we can see, this builds just another dictionary with items that are informative, in this case the feature names. To display them on the plot, we have to modify the figure dictionary and add a layout item; note that it is not a list. Then we can replot.
 
 
-{% highlight python lineanchors linenos=table %}
+{% highlight python %}
 fig = dict(data = traces, layout = scatter_plot_layout)
 plotly.offline.iplot(fig)
 {% endhighlight %}
@@ -595,7 +596,7 @@ This is already better. However, this does not help to distinguish between the d
 In order to do this we can use the following customised `colored_Scatter` function. It repeats exactly the same code as above, but this time it will generate two traces, one for each class of wines by iterating over the `classes` with `i`, once for good wines, once for worse wines. First, we load the function.
 
 
-{% highlight python lineanchors linenos=table %}
+{% highlight python %}
 def colored_Scatter(data, classes, f1, f2, color_scale, class_column):
     traces = []
     for i in range(len(classes)):
@@ -619,7 +620,7 @@ def colored_Scatter(data, classes, f1, f2, color_scale, class_column):
 Then we can call it with the necessary parameters: `data` - the table, `classes` - the unique wine classes in the `quality_bin` column, `f1` and `f2` for the two features and `color_scale` for the color scheme we want to assign to the different classes of wine. We also need to specify the name of the column with the classes, here `quality_bin`.
 
 
-{% highlight python lineanchors linenos=table %}
+{% highlight python %}
 import colorlover as cl #load nicer color schemes
 colors = (len(quality_classes) if len(quality_classes) > 2 else '3')
 color_scale = cl.scales[str(colors)]['qual']['Set1'] #define color scale
@@ -663,7 +664,7 @@ print(scatter_plot_traces)
 When inspecting the `scatter_plot_traces` we can first of all see that we have a list of dictionaries. The `colored_Scatter` function has generated one trace for each class of wine, and then put them together in a list. We can also see some new items in the individual traces, i.e. `'name'` which records the class of the wines, and within the marker dictionaries `'color'`, these can be found with a different `RGB` code for each wine class.
 
 
-{% highlight python lineanchors linenos=table %}
+{% highlight python %}
 fig = dict(data = scatter_plot_traces, layout = scatter_plot_layout)
 plotly.offline.iplot(fig)
 {% endhighlight %}
@@ -679,7 +680,7 @@ This is already better. The legend on the top right is displayed by default. Now
 Let us first choose the features that we want to compare simultaneously.
 
 
-{% highlight python lineanchors linenos=table %}
+{% highlight python %}
 features = ["pH", "chlorides", "sulphates", "alcohol"]
 N = len(features)
 {% endhighlight %}
@@ -687,7 +688,7 @@ N = len(features)
 As we building multiple scatterplots into one big plot, we will rely on making many subplots. Plotly has a relatively straightforward way of dealing with this scenario. What we want to do first is to determine the position of the different scatterplots in the matrix. We could just plot all features against each other, but this would include the features against themselves. This would result in relatively uninformative straight lines of points. For now we want to leave these regions empty and later insert more informative boxplots. So for now, we want to take all the combinations of features, excluding features against themselves. One way of doing this is to use all permutations of the `features`.
 
 
-{% highlight python lineanchors linenos=table %}
+{% highlight python %}
 #load itertools to make permutations
 import itertools
 plot_positions = list(itertools.permutations(range(N), 2))
@@ -700,7 +701,7 @@ print(plot_positions)
 This gives the positions of the different scatterplots in the matrix. We will iterate over this list to generate one plot at a time.
 
 
-{% highlight python lineanchors linenos=table %}
+{% highlight python %}
 scatter_plot_traces = []
 
 for c in range(len(plot_positions)):
@@ -726,7 +727,7 @@ However, once the `colored_Scatter` function is called for a given position in t
 The axes are, as before, defined in more detail in the `layout` dictionary. It is here that a correspondence between the traces and the axes is established so that there is a match for each trace to the fitting axis of the scatterplot matrix. Furthermore, the domain of each axis needs to be defined. The domain indicates the fractional amount of space a subplot has in the scatterplot matrix.
 
 
-{% highlight python lineanchors linenos=table %}
+{% highlight python %}
 def calcDomain(index, N, pad):
     return [index*pad+index*(1-(N-1)*pad)/N, index*pad+((index+1)*(1-(N-1)*pad)/N)]
 
@@ -740,7 +741,7 @@ print(plot_domains)
 The above function will split the space of the scatterplot matrix into even portions, one scatterplot for each feature that is included. Furthermore, it adds some padding between the individual subplots.
 
 
-{% highlight python lineanchors linenos=table %}
+{% highlight python %}
 scatter_plot_layout = {}
 
 for i in range(N):
@@ -767,7 +768,7 @@ As a preference, I have set the yaxis labels on the right side of the plot; this
 We can have a quick look at what the plot would look like at this stage.
 
 
-{% highlight python lineanchors linenos=table %}
+{% highlight python %}
 fig = dict(data = scatter_plot_traces, layout = scatter_plot_layout)
 plotly.offline.iplot(fig)
 {% endhighlight %}
@@ -789,7 +790,7 @@ Some additional parameters ensure that the boxplot shows outliers with `boxpoint
 Notice also the boxplot only takes one feature at a time.
 
 
-{% highlight python lineanchors linenos=table %}
+{% highlight python %}
 def colored_Box(data, classes, f1, color_scale, class_column):
     traces = []
     for i in range(len(classes)):
@@ -811,7 +812,7 @@ def colored_Box(data, classes, f1, color_scale, class_column):
 Again, we can call the `colored_Box` function with its required parameters to see what a boxplot looks like.
 
 
-{% highlight python lineanchors linenos=table %}
+{% highlight python %}
 box_plot_traces = colored_Box(
     data = df_sample,
     classes = quality_classes,
@@ -824,7 +825,7 @@ box_plot_traces = colored_Box(
 The boxplot traces are very similar in their makeup to the scatterplots, differing most importantly by their `type`; you can look into them with `print(box_plot_traces)` as before.
 
 
-{% highlight python lineanchors linenos=table %}
+{% highlight python %}
 fig = dict(data = box_plot_traces)
 plotly.offline.iplot(fig)
 {% endhighlight %}
@@ -839,7 +840,7 @@ Plotly's interactivity highlights the boxplot statistics as we hover over them.
 Now we will generate all of the boxplots traces for the different classes and features before integrating them into the scatterplot matrix.
 
 
-{% highlight python lineanchors linenos=table %}
+{% highlight python %}
 box_plot_traces = []
 
 for i in range(N):
@@ -859,7 +860,7 @@ for i in range(N):
 It is important here to generate new x-axes for the boxplots whilst making sure the y-axes are shared with those of the scatterplots. In the code we build new x-axes in adding the number of features (`N`).
 
 
-{% highlight python lineanchors linenos=table %}
+{% highlight python %}
 box_plot_layout = {}
 
 for i in range(N):
@@ -876,7 +877,7 @@ Then we adjust the boxplots' layout by defining their new x-axes and associating
 Finally, we can set some general dimensions to the scatterplot matrix and give it a title.
 
 
-{% highlight python lineanchors linenos=table %}
+{% highlight python %}
 general_layout = {
     'title': 'Scatterplot Matrix',
     'height': 850,
@@ -888,7 +889,7 @@ general_layout = {
 What is very convenient is that we can simply add the boxplot traces to the `traces` list and Plotly will understand how to represent it as all the necessary information is contained. The same goes for the layout.
 
 
-{% highlight python lineanchors linenos=table %}
+{% highlight python %}
 traces = scatter_plot_traces + box_plot_traces
 layout = dict(scatter_plot_layout.items() + box_plot_layout.items() + general_layout.items())
 
@@ -910,7 +911,7 @@ This post was also released on the blog of the [Cambridge Coding Academy](http:/
 
 Below is the complete code (it can also be found on https://github.com/cnjr2/plotly_scatterplot_matrix):
 
-{% highlight python lineanchors linenos=table %}
+{% highlight python %}
 def scatterplot_matrix_boxed(data, classes, features, padding, color_scale, class_column = "quality"):
     #import packages
     import itertools
@@ -1034,7 +1035,7 @@ def colored_Box(data, classes, f1, color_scale, class_column):
 {% endhighlight %}
 
 
-{% highlight python lineanchors linenos=table %}
+{% highlight python %}
 #reload the dataset
 df = pd.read_csv('./winequality-red.csv', delimiter = ";")
 df_sample = df.sample(n = 500)

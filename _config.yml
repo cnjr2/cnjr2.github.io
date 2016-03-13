@@ -8,12 +8,16 @@ url: "http://clatalogue.com" # the base hostname & protocol for your site
 github_username: cnjr2
 
 # Build settings
-highlighter: pygments
 markdown: kramdown
-# markdown_ext:  markdown,mkdown,mkdn,mkd,md
+markdown_ext:  markdown,mkdown,mkdn,mkd,md
+
+highlighter: rouge
 
 # redcarpet:
 #   extensions: ["tables", "autolink", "strikethrough", "space_after_headers", "fenced_code_blocks"]
 
 gems:
   - jemoji
+  - jekyll-redirect-from
+
+permalink: pretty

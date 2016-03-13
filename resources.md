@@ -1,5 +1,5 @@
 ---
-layout: collection
+layout: list
 title: resources # name that appears in header
 permalink: /resources/
 ---
@@ -69,6 +69,7 @@ permalink: /resources/
     * [improve the code blocks in jekyll blocks](https://demisx.github.io/jekyll/2014/01/13/improve-code-highlighting-in-jekyll.html)
     * [github user pages setup with godaddy](http://andrewsturges.com/blog/jekyll/tutorial/2014/11/06/github-and-godaddy.html)
     * [:eyeglasses: complete blog setup on github pages with jekyll, comments, analytics](http://joshualande.com/jekyll-github-pages-poole/)
+    * [in yaml headers we can define variables - e.g. updated](https://talk.jekyllrb.com/t/show-the-last-modification-date-of-a-collection-document/1902)
 * Webapps
     [webapp development made easy](https://www.firebase.com)
 * Animted Gifs
