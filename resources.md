@@ -190,7 +190,7 @@ permalink: /resources/
     * [exercism = learn various languages via exercises](http://exercism.io/languages)
     * [Git tutorial](https://www.codecademy.com/learn/learn-git)
 * Git
-    * ...
+    * [Tool to remove large files or sensitive files from git repo and git repo history after they were added accidentally](https://rtyley.github.io/bfg-repo-cleaner/)
 * make
     * ...
 * Python
