@@ -191,6 +191,9 @@ permalink: /resources/
     * [Git tutorial](https://www.codecademy.com/learn/learn-git)
 * Git
     * [Tool to remove large files or sensitive files from git repo and git repo history after they were added accidentally](https://rtyley.github.io/bfg-repo-cleaner/)
+    * [The power of git subtrees](https://developer.atlassian.com/blog/2015/05/the-power-of-git-subtree/)
+    * [Setting up git subtrees](http://getlevelten.com/blog/tom-mccracken/smarter-drupal-projects-projects-management-git-subtree)
+    * [Another tutorial to setup subtrees](https://hpc.uni.lu/blog/2014/understanding-git-subtree/)
 * make
     * ...
 * Python

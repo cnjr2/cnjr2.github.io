@@ -13,9 +13,6 @@ markdown_ext:  markdown,mkdown,mkdn,mkd,md
 
 highlighter: rouge
 
-# redcarpet:
-#   extensions: ["tables", "autolink", "strikethrough", "space_after_headers", "fenced_code_blocks"]
-
 gems:
   - jemoji
   - jekyll-redirect-from
