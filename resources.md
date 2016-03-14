@@ -43,6 +43,7 @@ permalink: /resources/
     * [ggplot2 cheat sheet](https://www.rstudio.com/wp-content/uploads/2015/08/ggplot2-cheatsheet.pdf)
     * [ggrepel - have non-overlapping text labels :octocat:](https://github.com/slowkow/ggrepel)
     * [GGAlly for convenient data analysis](http://ggobi.github.io/ggally/gh-pages/ggpairs.html)
+    * [combine ggplot with plotly](https://plot.ly/ggplot2/geom_density/)
 * Tables
     * [display R model summaries in neat tables](http://www.strengejacke.de/sjPlot/sjt.lm/)
     * [`stargazer` package for table display](http://jakeruss.com/cheatsheets/stargazer.html)
